@@ -57,7 +57,6 @@ CHIP ALU {
 
     // f
     And16(a=nxOut, b=nyOut, out=andOut);
-    // Add16(a=nxOut, b=nyOut, out=addOut);
     Add16(a=nyOut, b=nxOut, out=addOut);
     Mux16(a=andOut, b=addOut, sel=f, out=fOut);
 
