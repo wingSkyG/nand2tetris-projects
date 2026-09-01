@@ -32,16 +32,42 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-	// parse instruction[15]
-    // if instruction[15] = 0, the instruction is A-instruction, else is C-instruction
+	// Instruction handling
     Not(in=instruction[15], out=isA);
     Not(in=isA, out=isC);
 
-    // handing of A-instruction
-    Mux16(a=ALUOutput, b=instruction, sel=isA, out=AInstruction);
-    Or(a=isA, b=instruction[5], out=loadAReg);
-    Register(in=AInstruction, load=loadAReg, out=address);
+    Mux16(a=instruction, b=ALUOut, sel=isC, out=ARegIn);
 
-    // handing of C-instruction
-    And(a=isC, b=instruction[5], out= );
+    And(a=isC, b=instruction[5], out=d1);
+    Or(a=isA, b=d1, out=loadAReg);
+    ARegister(in=ARegIn, load=loadAReg, out=ARegOut, out[0..14]=addressM);
+
+
+    // ALU operation
+    // ALU inputs
+    And(a=isC, b=instruction[4], out=d2);
+    DRegister(in=ALUOut, load=d2, out=ALUInputX);   // DRegister
+    Mux16(a=ARegOut, b=inM, sel=instruction[12], out=ALUInputY);
+    // ALU and outputs
+    ALU(x=ALUInputX, y=ALUInputY, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, zr=zr, ng=ng, out=ALUOut);
+
+
+    // writeM
+    And(a=isC, b=instruction[3], out=writeM);
+
+
+    // PC
+    And(a=isC, b=instruction[2], out=j1);   // <0
+    And(a=isC, b=instruction[1], out=j2);   // =0
+    And(a=isC, b=instruction[0], out=j3);   // >0
+    And(a=ng, b=j1, out=jlt);   // jlt
+    And(a=zr, b=j2, out=jeq);   // jeq
+    Not(in=ng, out=ge);
+    Not(in=zr, out=ne);
+    And(a=ge, b=ne, out=gt);
+    And(a=gt, b=j3, out=jgt);   // jgt
+    Or(a=jlt, b=jeq, out=jltjeq);
+    Or(a=jltjeq, b=jgt, out=jmp);
+
+    PC(in=ARegOut, load=jmp, inc=true, reset=reset, out[0..14] = pc);
 }
