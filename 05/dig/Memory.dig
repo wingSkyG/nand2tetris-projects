@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <circuit>
   <version>2</version>
-  <attributes/>
+  <attributes>
+    <entry>
+      <string>shapeType</string>
+      <shapeType>DIL</shapeType>
+    </entry>
+    <entry>
+      <string>pinCount</string>
+      <int>8</int>
+    </entry>
+    <entry>
+      <string>romContent</string>
+      <romList>
+        <roms/>
+      </romList>
+    </entry>
+    <entry>
+      <string>Width</string>
+      <int>8</int>
+    </entry>
+  </attributes>
   <visualElements>
     <visualElement>
       <elementName>In</elementName>
@@ -22,16 +41,6 @@
       <elementAttributes>
         <entry>
           <string>Label</string>
-          <string>load</string>
-        </entry>
-      </elementAttributes>
-      <pos x="160" y="400"/>
-    </visualElement>
-    <visualElement>
-      <elementName>In</elementName>
-      <elementAttributes>
-        <entry>
-          <string>Label</string>
           <string>address</string>
         </entry>
         <entry>
@@ -40,6 +49,16 @@
         </entry>
       </elementAttributes>
       <pos x="160" y="500"/>
+    </visualElement>
+    <visualElement>
+      <elementName>In</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>load</string>
+        </entry>
+      </elementAttributes>
+      <pos x="160" y="400"/>
     </visualElement>
     <visualElement>
       <elementName>Out</elementName>
@@ -208,16 +227,16 @@
       <elementName>Clock</elementName>
       <elementAttributes>
         <entry>
+          <string>runRealTime</string>
+          <boolean>true</boolean>
+        </entry>
+        <entry>
           <string>Label</string>
           <string>CLK</string>
         </entry>
         <entry>
           <string>Frequency</string>
           <int>10</int>
-        </entry>
-        <entry>
-          <string>runRealTime</string>
-          <boolean>true</boolean>
         </entry>
       </elementAttributes>
       <pos x="160" y="760"/>

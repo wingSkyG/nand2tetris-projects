@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <circuit>
   <version>2</version>
-  <attributes/>
+  <attributes>
+    <entry>
+      <string>shapeType</string>
+      <shapeType>DIL</shapeType>
+    </entry>
+    <entry>
+      <string>romContent</string>
+      <romList>
+        <roms/>
+      </romList>
+    </entry>
+    <entry>
+      <string>Height</string>
+      <int>6</int>
+    </entry>
+    <entry>
+      <string>Width</string>
+      <int>11</int>
+    </entry>
+  </attributes>
   <visualElements>
     <visualElement>
       <elementName>In</elementName>
@@ -22,14 +41,14 @@
       <elementAttributes>
         <entry>
           <string>Label</string>
-          <string>outM</string>
+          <string>pc</string>
         </entry>
         <entry>
           <string>Bits</string>
-          <int>16</int>
+          <int>15</int>
         </entry>
       </elementAttributes>
-      <pos x="2080" y="220"/>
+      <pos x="2080" y="880"/>
     </visualElement>
     <visualElement>
       <elementName>Out</elementName>
@@ -60,14 +79,14 @@
       <elementAttributes>
         <entry>
           <string>Label</string>
-          <string>pc</string>
+          <string>outM</string>
         </entry>
         <entry>
           <string>Bits</string>
-          <int>15</int>
+          <int>16</int>
         </entry>
       </elementAttributes>
-      <pos x="2080" y="880"/>
+      <pos x="2080" y="220"/>
     </visualElement>
     <visualElement>
       <elementName>Mux16.dig</elementName>
@@ -893,12 +912,16 @@
       <p2 x="1940" y="20"/>
     </wire>
     <wire>
-      <p1 x="760" y="920"/>
-      <p2 x="940" y="920"/>
+      <p1 x="600" y="980"/>
+      <p2 x="900" y="980"/>
     </wire>
     <wire>
       <p1 x="1280" y="920"/>
       <p2 x="1300" y="920"/>
+    </wire>
+    <wire>
+      <p1 x="900" y="920"/>
+      <p2 x="940" y="920"/>
     </wire>
     <wire>
       <p1 x="1140" y="860"/>
@@ -1129,6 +1152,10 @@
       <p2 x="900" y="880"/>
     </wire>
     <wire>
+      <p1 x="900" y="920"/>
+      <p2 x="900" y="980"/>
+    </wire>
+    <wire>
       <p1 x="420" y="100"/>
       <p2 x="420" y="140"/>
     </wire>
@@ -1223,10 +1250,6 @@
     <wire>
       <p1 x="760" y="820"/>
       <p2 x="760" y="880"/>
-    </wire>
-    <wire>
-      <p1 x="760" y="880"/>
-      <p2 x="760" y="920"/>
     </wire>
     <wire>
       <p1 x="1020" y="100"/>

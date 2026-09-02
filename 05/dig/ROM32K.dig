@@ -3,8 +3,12 @@
   <version>2</version>
   <attributes>
     <entry>
+      <string>shapeType</string>
+      <shapeType>DIL</shapeType>
+    </entry>
+    <entry>
       <string>pinCount</string>
-      <int>4</int>
+      <int>3</int>
     </entry>
     <entry>
       <string>romContent</string>
@@ -14,7 +18,7 @@
     </entry>
     <entry>
       <string>Width</string>
-      <int>7</int>
+      <int>5</int>
     </entry>
   </attributes>
   <visualElements>
@@ -24,6 +28,10 @@
         <entry>
           <string>AddrBits</string>
           <int>15</int>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>ROM32K</string>
         </entry>
         <entry>
           <string>Bits</string>
@@ -41,7 +49,7 @@
       <elementAttributes>
         <entry>
           <string>Label</string>
-          <string>address</string>
+          <string>A</string>
         </entry>
         <entry>
           <string>Bits</string>
@@ -51,11 +59,21 @@
       <pos x="200" y="220"/>
     </visualElement>
     <visualElement>
+      <elementName>In</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>sel</string>
+        </entry>
+      </elementAttributes>
+      <pos x="200" y="260"/>
+    </visualElement>
+    <visualElement>
       <elementName>Out</elementName>
       <elementAttributes>
         <entry>
           <string>Label</string>
-          <string>out</string>
+          <string>D</string>
         </entry>
         <entry>
           <string>Bits</string>
@@ -64,11 +82,6 @@
       </elementAttributes>
       <pos x="500" y="240"/>
     </visualElement>
-    <visualElement>
-      <elementName>Const</elementName>
-      <elementAttributes/>
-      <pos x="260" y="260"/>
-    </visualElement>
   </visualElements>
   <wires>
     <wire>
@@ -76,7 +89,7 @@
       <p2 x="500" y="240"/>
     </wire>
     <wire>
-      <p1 x="260" y="260"/>
+      <p1 x="200" y="260"/>
       <p2 x="320" y="260"/>
     </wire>
     <wire>
@@ -85,7 +98,8 @@
     </wire>
   </wires>
   <measurementOrdering>
-    <string>out</string>
-    <string>address</string>
+    <string>A</string>
+    <string>sel</string>
+    <string>D</string>
   </measurementOrdering>
 </circuit>
