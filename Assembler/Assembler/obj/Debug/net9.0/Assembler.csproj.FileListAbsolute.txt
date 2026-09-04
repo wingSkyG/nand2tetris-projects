@@ -29,3 +29,37 @@ C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\obj\De
 C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.pdb
 C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.genruntimeconfig.cache
 C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\ref\Assembler.dll
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Add.asm
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.exe
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.deps.json
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.runtimeconfig.json
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.dll
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.pdb
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.GeneratedMSBuildEditorConfig.editorconfig
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.AssemblyInfoInputs.cache
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.AssemblyInfo.cs
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.csproj.CoreCompileInputs.cache
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.sourcelink.json
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.dll
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\refint\Assembler.dll
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.pdb
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.genruntimeconfig.cache
+F:\Code\Project\Program\The Nand to Tetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\ref\Assembler.dll
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.exe
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.deps.json
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.runtimeconfig.json
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.dll
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.pdb
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.GeneratedMSBuildEditorConfig.editorconfig
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.AssemblyInfoInputs.cache
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.AssemblyInfo.cs
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.csproj.CoreCompileInputs.cache
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.sourcelink.json
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.dll
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\refint\Assembler.dll
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.pdb
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\Assembler.genruntimeconfig.cache
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\obj\Debug\net9.0\ref\Assembler.dll
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\TestCases\AInstruction.asm
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\TestCases\LInstruction.asm
+F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\TestCases\CInstruction.asm
