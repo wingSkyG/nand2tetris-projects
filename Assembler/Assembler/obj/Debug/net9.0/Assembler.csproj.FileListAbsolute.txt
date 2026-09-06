@@ -13,7 +13,6 @@ C:\WorkStation\Study\Nand2Tetris\Assembler\Assembler\obj\Debug\net9.0\Assembler.
 C:\WorkStation\Study\Nand2Tetris\Assembler\Assembler\obj\Debug\net9.0\Assembler.genruntimeconfig.cache
 C:\WorkStation\Study\Nand2Tetris\Assembler\Assembler\obj\Debug\net9.0\ref\Assembler.dll
 C:\WorkStation\Study\Nand2Tetris\Assembler\Assembler\bin\Debug\net9.0\Add.asm
-C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Add.asm
 C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.exe
 C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.deps.json
 C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\Assembler.runtimeconfig.json
@@ -63,3 +62,6 @@ F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\ob
 F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\TestCases\AInstruction.asm
 F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\TestCases\LInstruction.asm
 F:\Code\Project\Program\NandToTetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\TestCases\CInstruction.asm
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\TestCases\AInstruction.asm
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\TestCases\CInstruction.asm
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\bin\Debug\net9.0\TestCases\LInstruction.asm
