@@ -7,7 +7,7 @@ public class Assembler
 
     public string Assemble(string inputFile)
     {
-        if(string.IsNullOrEmpty(inputFile))
+        if (string.IsNullOrEmpty(inputFile))
         {
             Console.WriteLine($"Inputfile is null or empty, please provide a valid assembly file name.");
             return string.Empty;
@@ -19,11 +19,50 @@ public class Assembler
             return string.Empty;
         }
 
+        Reset();
 
         FirstPass(inputFile);
         SecondPass(inputFile, out string? binaryCode);
 
         return binaryCode;
+    }
+    
+    private void Reset()
+    {
+        SymbolTable.Reset();
+        parser.ResetVarStartAddress();
+    }
+
+    /// <summary>
+    /// Perform the first pass to populate the symbol table with label symbols (L-instructions)
+    /// </summary>
+    private void FirstPass(string inputFile)
+    {
+        using (StreamReader reader = new StreamReader(inputFile))
+        {
+            var curInstruction = "";
+            var lineNumber = 0;
+
+            while (HasMoreLines(reader))
+            {
+                var curLine = GetCurrentLine(reader);
+                if (Advance(curLine))
+                {
+                    continue;
+                }
+
+                curInstruction = TrimInlineComment(curLine);
+
+                if (parser.ParseInstructionType(curInstruction) != InstructionType.L_INSTRUCTION)
+                {
+                    lineNumber++;
+                    continue;
+                }
+
+                var symbol = parser.ParseSymbol(InstructionType.L_INSTRUCTION, curInstruction);
+                SymbolTable.AddEntry(symbol, lineNumber);
+            }
+        }
     }
 
     /// <summary>
@@ -40,13 +79,21 @@ public class Assembler
 
             while (HasMoreLines(reader))
             {
-                curInstruction = GetCurrentLine(reader);
-                if (Advance(curInstruction))
+                // curInstruction = GetCurrentLine(reader);
+                // if (Advance(curInstruction))
+                // {
+                //     continue;
+                // }
+
+                var curLine = GetCurrentLine(reader);
+                if (Advance(curLine))
                 {
                     continue;
                 }
 
-                if(parser.ParseInstructionType(curInstruction) == InstructionType.L_INSTRUCTION)
+                curInstruction = TrimInlineComment(curLine);
+
+                if (parser.ParseInstructionType(curInstruction) == InstructionType.L_INSTRUCTION)
                 {
                     continue;
                 }
@@ -60,36 +107,6 @@ public class Assembler
             }
 
             // Console.WriteLine(binaryCode);
-        }
-    }
-
-    /// <summary>
-    /// Perform the first pass to populate the symbol table with label symbols (L-instructions)
-    /// </summary>
-    private void FirstPass(string inputFile)
-    {
-        using (StreamReader reader = new StreamReader(inputFile))
-        {
-            var curInstruction = "";
-            var lineNumber = 0;
-
-            while (HasMoreLines(reader))
-            {
-                curInstruction = GetCurrentLine(reader);
-                if (Advance(curInstruction))
-                {
-                    continue;
-                }
-
-                if (parser.ParseInstructionType(curInstruction) != InstructionType.L_INSTRUCTION)
-                {
-                    lineNumber++;
-                    continue;
-                }
-
-                var symbol = parser.ParseSymbol(InstructionType.L_INSTRUCTION, curInstruction);
-                SymbolTable.AddEntry(symbol, lineNumber);
-            }
         }
     }
 
@@ -109,6 +126,15 @@ public class Assembler
     private bool Advance(string currentLine)
     {
         return string.IsNullOrEmpty(currentLine) || currentLine.StartsWith("//");
+    }
+
+    /// <summary>
+    /// trim inline comment
+    /// </summary>
+    private string TrimInlineComment(string currentLine)
+    {
+        var trimmedLine = currentLine.Split("//")[0].Trim();
+        return trimmedLine;
     }
 
     /// <summary>

@@ -4,7 +4,56 @@ public static class SymbolTable
 
     static SymbolTable()
     {
-        // Initialize the symbol table with predefined symbols
+        InitSymbolTable();
+    }
+
+    public static void Reset()
+    {
+        SYMBOL_TABLE_DICT.Clear();
+        InitSymbolTable();
+    }
+
+    /// <summary>
+    /// Get the address associated with the specified symbol
+    /// </summary>
+    public static void AddEntry(string symbol, int address)
+    {
+        if (SYMBOL_TABLE_DICT.ContainsKey(symbol))
+        {
+            Console.WriteLine($"Symbol {symbol} already exists in the symbol table.");
+            return;
+        }
+
+        SYMBOL_TABLE_DICT.Add(symbol, address);
+    }
+
+    /// <summary>
+    /// Check if the symbol table contains the specified symbol
+    /// </summary>
+    public static bool Contains(string symbol)
+    {
+        return SYMBOL_TABLE_DICT.ContainsKey(symbol);
+    }
+
+    /// <summary>
+    /// Get the address associated with the specified symbol
+    /// </summary>
+    public static int GetAddress(string symbol)
+    {
+        if (!SYMBOL_TABLE_DICT.TryGetValue(symbol, out int address))
+        {
+            Console.WriteLine($"Symbol {symbol} not found in the symbol table.");
+            return -1;
+        }
+
+        return address;
+    }
+
+    /// <summary>
+    /// Initialize the symbol table with predefined symbols
+    /// </summary>
+    private static void InitSymbolTable()
+    {
         var predifinedSymbols = new List<KeyValuePair<string, int>>
         {
             new KeyValuePair<string, int>("R0", 0),
@@ -36,41 +85,5 @@ public static class SymbolTable
         {
             SYMBOL_TABLE_DICT.Add(symbol.Key, symbol.Value);
         }
-    }
-
-    /// <summary>
-    /// Get the address associated with the specified symbol
-    /// </summary>
-    public static void AddEntry(string symbol, int address)
-    {
-        if(SYMBOL_TABLE_DICT.ContainsKey(symbol))
-        {
-            Console.WriteLine($"Symbol {symbol} already exists in the symbol table.");
-            return;
-        }
-
-        SYMBOL_TABLE_DICT.Add(symbol, address);
-    }
-
-    /// <summary>
-    /// Check if the symbol table contains the specified symbol
-    /// </summary>
-    public static bool Contains(string symbol)
-    {
-        return SYMBOL_TABLE_DICT.ContainsKey(symbol);
-    }
-
-    /// <summary>
-    /// Get the address associated with the specified symbol
-    /// </summary>
-    public static int GetAddress(string symbol)
-    {
-        if (!SYMBOL_TABLE_DICT.TryGetValue(symbol, out int address))
-        {
-            Console.WriteLine($"Symbol {symbol} not found in the symbol table.");
-            return -1;
-        }
-        
-        return address;
     }
 }

@@ -4,6 +4,11 @@ class Parser
 {
     private int varStartAddress = 16; // Starting address for variable symbols
 
+    public void ResetVarStartAddress()
+    {
+        varStartAddress = 0;
+    }
+
     /// <summary>
     /// 将instruction解析fields
     /// </summary>
