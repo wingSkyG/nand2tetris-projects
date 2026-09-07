@@ -2,27 +2,28 @@
 {
     private static void Main(string[] args)
     {
-        // if (args.Length == 0)
-        // {
-        //     Console.WriteLine("Please provide the name of the assembly file to assemble.");
-        //     return;
-        // }
+        if (args.Length == 0)
+        {
+            Console.WriteLine("Please provide the name of the assembly file to assemble.");
+            return;
+        }
 
-        // var fileName = args[0];
+        var inputFile = args[0];
+        if (!File.Exists(inputFile))
+        {
+            Console.WriteLine("File not found: " + inputFile);
+            return;
+        }
 
-        var inputFile = @"C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Assembler\Assembler\TestCases\pong\PongL.asm";
-        var outputFile = @"Prog.hack";
-
+        // assemble
         var assembler = new Assembler();
         var binaryCode = assembler.Assemble(inputFile);
 
-        if (!File.Exists(outputFile))
-        {
-            File.Create(outputFile);
-        }
-        using (StreamWriter writer = new StreamWriter(outputFile, false))
-        {
-            writer.Write(binaryCode);
-        }
+        // output file
+        var outputFileDirectory = Path.GetDirectoryName(inputFile) ?? Directory.GetCurrentDirectory();
+        var outputFileName = Path.GetFileNameWithoutExtension(inputFile);
+        var outputFileNameWithExtension = outputFileName + ".hack";
+        var outputFilePath = Path.Combine(outputFileDirectory, outputFileNameWithExtension);
+        File.WriteAllText(outputFilePath, binaryCode);
     }
 }

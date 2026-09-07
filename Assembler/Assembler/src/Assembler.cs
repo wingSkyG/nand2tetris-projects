@@ -59,7 +59,7 @@ public class Assembler
                 }
             }
 
-            Console.WriteLine(binaryCode);
+            // Console.WriteLine(binaryCode);
         }
     }
 
