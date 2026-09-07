@@ -6,7 +6,7 @@ class Parser
 
     public void ResetVarStartAddress()
     {
-        varStartAddress = 0;
+        varStartAddress = 16;
     }
 
     /// <summary>
@@ -69,6 +69,7 @@ class Parser
         var atIndex = instruction.IndexOf('@');
         var remain = instruction.Substring(atIndex + 1);
 
+        // handing variable symbol
         if (IsSymbol(remain))
         {
             if (SymbolTable.Contains(remain))
@@ -79,8 +80,8 @@ class Parser
 
             // If the symbol is not in the symbol table, add it
             SymbolTable.AddEntry(remain, varStartAddress);
-            varStartAddress++;
             value = varStartAddress.ToString();
+            varStartAddress++;
             return "decimal";
         }
 

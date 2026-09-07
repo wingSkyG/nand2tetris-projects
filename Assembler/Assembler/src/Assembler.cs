@@ -79,12 +79,6 @@ public class Assembler
 
             while (HasMoreLines(reader))
             {
-                // curInstruction = GetCurrentLine(reader);
-                // if (Advance(curInstruction))
-                // {
-                //     continue;
-                // }
-
                 var curLine = GetCurrentLine(reader);
                 if (Advance(curLine))
                 {
