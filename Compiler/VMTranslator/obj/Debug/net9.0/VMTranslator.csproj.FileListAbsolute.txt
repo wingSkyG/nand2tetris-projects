@@ -1,0 +1,15 @@
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\bin\Debug\net9.0\VMTranslator.exe
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\bin\Debug\net9.0\VMTranslator.deps.json
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\bin\Debug\net9.0\VMTranslator.runtimeconfig.json
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\bin\Debug\net9.0\VMTranslator.dll
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\bin\Debug\net9.0\VMTranslator.pdb
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\obj\Debug\net9.0\VMTranslator.GeneratedMSBuildEditorConfig.editorconfig
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\obj\Debug\net9.0\VMTranslator.AssemblyInfoInputs.cache
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\obj\Debug\net9.0\VMTranslator.AssemblyInfo.cs
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\obj\Debug\net9.0\VMTranslator.csproj.CoreCompileInputs.cache
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\obj\Debug\net9.0\VMTranslator.sourcelink.json
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\obj\Debug\net9.0\VMTranslator.dll
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\obj\Debug\net9.0\refint\VMTranslator.dll
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\obj\Debug\net9.0\VMTranslator.pdb
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\obj\Debug\net9.0\VMTranslator.genruntimeconfig.cache
+C:\WorkStation\Study\Nand2Tetris\nand2tetris-projects\Compiler\VMTranslator\obj\Debug\net9.0\ref\VMTranslator.dll

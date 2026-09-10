@@ -1,0 +1,7 @@
+class CodeWriter
+{
+    public CodeWriter()
+    {
+        
+    }
+}

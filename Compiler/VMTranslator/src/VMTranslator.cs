@@ -1,0 +1,7 @@
+class VMTranslator
+{
+    public VMTranslator()
+    {
+        
+    }
+}
