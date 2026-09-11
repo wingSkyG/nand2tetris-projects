@@ -9,13 +9,9 @@
         },
         {
             "name": "VMTranslator",
-            "type": "coreclr",
+            "type": "dotnet",
             "request": "launch",
-            // "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Compiler/VMTranslator/bin/Debug/net9.0/VMTranslator.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/Compiler/VMTranslator",
-            "console": "integratedTerminal"
+            "projectPath": "${workspaceFolder}/Compiler/VMTranslator/VMTranslator.csproj"
         }
     ]
 }
