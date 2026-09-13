@@ -4,29 +4,28 @@ class VMTranslator
     private Parser parser = new();
     private CodeWriter codeWriter = new();
 
+    /// <summary>
+    /// 翻译VM文件为Assembly Code
+    /// </summary>
     public string Translate(string inputFile)
     {
+        var assemblyCode = "";
+
         using (StreamReader reader = new StreamReader(inputFile))
         {
-            var curVMCommand = "";
-            var lineNumber = 0;
-
             while (HasMoreLines(reader))
             {
                 var curLine = GetCurrentLine(reader);
-
-                if (parser.ParseInstructionType(curVMCommand) != InstructionType.L_INSTRUCTION)
+                var vmCommand = parser.ParseVMCommand(curLine);
+                if(vmCommand == null)
                 {
-                    lineNumber++;
                     continue;
                 }
-
-                var symbol = parser.ParseSymbol(InstructionType.L_INSTRUCTION, curVMCommand);
-                SymbolTable.AddEntry(symbol, lineNumber);
+                assemblyCode += codeWriter.TranslateVMCommand(vmCommand) + "\n";
             }
         }
 
-        return "";
+        return assemblyCode;
     }
 
     /// <summary>

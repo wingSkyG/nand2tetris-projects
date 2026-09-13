@@ -5,11 +5,10 @@ class Parser
     /// <summary>
     /// 解析VMCommand
     /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    public Dictionary<string, string>? ParseVMCommand(string command)
+    /// <returns>包含VMCommand组件的字典(key: firstParameter, value: secondParameter)</returns>
+    public VMCommand? ParseVMCommand(string command)
     {
-        var components = new Dictionary<string, string>();
+        var vmCommand = new VMCommand();
 
         if (Advance(command))
         {
@@ -19,18 +18,31 @@ class Parser
         var trimmedCommand = TrimInlineComment(command);
 
         var commandType = ParseCommandType(trimmedCommand);
+        System.Console.WriteLine($"ParseVMCommand: {commandType}");
 
-        if (commandType != CommandType.C_RETURN)
+        switch (commandType)
         {
-            components.Add("firstParameter", ParseFirstParameter(trimmedCommand));
+            case CommandType.C_ARITHMETIC:
+                var arithmeticCommand = new ArithmeticCommand();
+                arithmeticCommand.CommandType = commandType;
+                arithmeticCommand.OperatorType = Enum.Parse<ArithmeticOperatorType>(trimmedCommand);
+                vmCommand = arithmeticCommand;
+                break;
+            case CommandType.C_PUSH:
+                var pushCommand = new PushCommand();
+                pushCommand.SegmentType = Enum.Parse<SegmentType>(ParseFirstParameter(trimmedCommand));
+                pushCommand.Index = int.Parse(ParseSecondParameter(trimmedCommand));
+                vmCommand = pushCommand;
+                break;
+            case CommandType.C_POP:
+                var popCommand = new PopCommand();
+                popCommand.SegmentType = (SegmentType)Enum.Parse(typeof(SegmentType), ParseFirstParameter(trimmedCommand));
+                popCommand.Index = int.Parse(ParseSecondParameter(trimmedCommand));
+                vmCommand = popCommand;
+                break;
         }
 
-        if (ShouldParseSecondParameterBeCalled(commandType))
-        {
-            components.Add("secondParameter", ParseSecondParameter(trimmedCommand));
-        }
-
-        return components;
+        return vmCommand;
     }
 
     /// <summary>
@@ -38,16 +50,51 @@ class Parser
     /// </summary>
     private CommandType ParseCommandType(string command)
     {
-        var firstKeyword = command.Split(" ")[0];
+        var commandTypeString = command.Split(" ")[0];
 
-        if (MemoryAccessKeyWords.Contains(firstKeyword))
+        if (ArithmeticLogicalKeyWords.Contains(commandTypeString))
+        {
+            return CommandType.C_ARITHMETIC;
+        }
+
+        if (commandTypeString == PushKeyWord)
         {
             return CommandType.C_PUSH;
         }
 
-        if (ArithmeticLogicalKeyWords.Contains(firstKeyword))
+        if (commandTypeString == PopKeyWord)
         {
-            return CommandType.C_ARITHMETIC;
+            return CommandType.C_POP;
+        }
+
+        if (commandTypeString == LabelKeyWord)
+        {
+            return CommandType.C_LABEL;
+        }
+
+        if (commandTypeString == GotoKeyWord)
+        {
+            return CommandType.C_GOTO;
+        }
+
+        if (commandTypeString == IfKeyWord)
+        {
+            return CommandType.C_IF;
+        }
+
+        if (commandTypeString == FunctionKeyWord)
+        {
+            return CommandType.C_FUNCTION;
+        }
+
+        if (commandTypeString == ReturnKeyWord)
+        {
+            return CommandType.C_RETURN;
+        }
+
+        if (commandTypeString == CallKeyWord)
+        {
+            return CommandType.C_CALL;
         }
 
         Console.WriteLine($"Parse error: Unrecognized command type for command '{command}'.");
@@ -75,7 +122,7 @@ class Parser
     /// <summary>
     /// 判断是否需要解析第二个Parameter
     /// </summary>
-    private bool ShouldParseSecondParameterBeCalled(CommandType commandType)
+    private bool ShouldParseSecondParameter(CommandType commandType)
     {
         if (commandType == CommandType.C_PUSH || commandType == CommandType.C_POP || commandType == CommandType.C_FUNCTION || commandType == CommandType.C_CALL)
         {
