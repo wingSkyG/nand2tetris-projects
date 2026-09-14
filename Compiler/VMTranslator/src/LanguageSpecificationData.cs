@@ -80,4 +80,8 @@ public static class LanguageSpecificationData
     };
 
     public static int TempBaseAddress = 5;
+    public static int ThisPointerIndex = 0;
+    public static int ThatPointerIndex = 1;
+    public static int StaticVariableBaseAddress = 16;
+    public static string FileName = "";
 }

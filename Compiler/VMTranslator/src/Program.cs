@@ -21,13 +21,16 @@
             return;
         }
 
+        var inputFileName = Path.GetFileNameWithoutExtension(inputFile);
+        LanguageSpecificationData.FileName = inputFileName;
+
         // translate
         var vmTranslator = new VMTranslator();
         var assemblyCode = vmTranslator.Translate(inputFile);
 
         // output file
         var outputFileDirectory = Path.GetDirectoryName(inputFile) ?? Directory.GetCurrentDirectory();
-        var outputFileName = Path.GetFileNameWithoutExtension(inputFile);
+        var outputFileName = inputFileName;
         var outputFileNameWithExtension = outputFileName + ".asm";
         var outputFilePath = Path.Combine(outputFileDirectory, outputFileNameWithExtension);
         File.WriteAllText(outputFilePath, assemblyCode);
