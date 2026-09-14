@@ -18,7 +18,7 @@ class Parser
         var trimmedCommand = TrimInlineComment(command);
 
         var commandType = ParseCommandType(trimmedCommand);
-        System.Console.WriteLine($"ParseVMCommand: {commandType}");
+        // Console.WriteLine($"ParseVMCommand: {commandType}");
 
         switch (commandType)
         {
@@ -117,19 +117,6 @@ class Parser
     {
         var secondParameter = command.Split(" ")[2];
         return secondParameter;
-    }
-
-    /// <summary>
-    /// 判断是否需要解析第二个Parameter
-    /// </summary>
-    private bool ShouldParseSecondParameter(CommandType commandType)
-    {
-        if (commandType == CommandType.C_PUSH || commandType == CommandType.C_POP || commandType == CommandType.C_FUNCTION || commandType == CommandType.C_CALL)
-        {
-            return true;
-        }
-
-        return false;
     }
 
     /// <summary>

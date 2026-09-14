@@ -17,7 +17,7 @@ class VMTranslator
             {
                 var curLine = GetCurrentLine(reader);
                 var vmCommand = parser.ParseVMCommand(curLine);
-                if(vmCommand == null)
+                if (vmCommand == null)
                 {
                     continue;
                 }
@@ -25,6 +25,7 @@ class VMTranslator
             }
         }
 
+        assemblyCode = assemblyCode.TrimEnd('\n');
         return assemblyCode;
     }
 

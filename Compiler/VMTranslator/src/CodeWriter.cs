@@ -8,7 +8,7 @@ class CodeWriter
     public string TranslateVMCommand(VMCommand command)
     {
         var assemblyCode = string.Empty;
-        System.Console.WriteLine($"TranslateVMCommand: {command}");
+        // Console.WriteLine($"TranslateVMCommand: {command}");
 
         switch (command)
         {
