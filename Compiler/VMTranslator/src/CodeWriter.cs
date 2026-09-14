@@ -137,6 +137,9 @@ class CodeWriter
     /// </summary>
     private string WriteLt()
     {
+        var LT_TRUELabel = GenerateComparisonLabelName(ComparisonLabelType.LT_TRUE);
+        var LT_ENDLabel = GenerateComparisonLabelName(ComparisonLabelType.LT_END);
+
         var assemblyCode = $"""
             // lt
             @SP
@@ -146,19 +149,19 @@ class CodeWriter
             @SP
             M=M-1
             A=M
-            D=D-M
-            @LT_TRUE
+            D=M-D
+            @{LT_TRUELabel}
             D;JLT
             @SP
             A=M
             M=0
-            @LT_END
+            @{LT_ENDLabel}
             0;JMP
-            (LT_TRUE)
+            ({LT_TRUELabel})
             @SP
             A=M
             M=-1
-            (LT_END)
+            ({LT_ENDLabel})
             @SP
             M=M+1
             """;
@@ -170,6 +173,9 @@ class CodeWriter
     /// </summary>
     private string WriteGt()
     {
+        var GT_TRUELabel = GenerateComparisonLabelName(ComparisonLabelType.GT_TRUE);
+        var GT_ENDLabel = GenerateComparisonLabelName(ComparisonLabelType.GT_END);
+
         var assemblyCode = $"""
             // gt
             @SP
@@ -179,19 +185,19 @@ class CodeWriter
             @SP
             M=M-1
             A=M
-            D=D-M
-            @GT_TRUE
+            D=M-D
+            @{GT_TRUELabel}
             D;JGT
             @SP
             A=M
             M=0
-            @GT_END
+            @{GT_ENDLabel}
             0;JMP
-            (GT_TRUE)
+            ({GT_TRUELabel})
             @SP
             A=M
             M=-1
-            (GT_END)
+            ({GT_ENDLabel})
             @SP
             M=M+1
             """;
@@ -203,6 +209,9 @@ class CodeWriter
     /// </summary>
     private string WriteEq()
     {
+        var EQ_TRUELabel = GenerateComparisonLabelName(ComparisonLabelType.EQ_TRUE);
+        var EQ_ENDLabel = GenerateComparisonLabelName(ComparisonLabelType.EQ_END);
+
         var assemblyCode = $"""
             // eq
             @SP
@@ -213,22 +222,64 @@ class CodeWriter
             M=M-1
             A=M
             D=D-M
-            @EQ_TRUE
+            @{EQ_TRUELabel}
             D;JEQ
             @SP
             A=M
             M=0
-            @EQ_END
+            @{EQ_ENDLabel}
             0;JMP
-            (EQ_TRUE)
+            ({EQ_TRUELabel})
             @SP
             A=M
             M=-1
-            (EQ_END)
+            ({EQ_ENDLabel})
             @SP
             M=M+1
             """;
         return assemblyCode;
+    }
+
+    /// <summary>
+    /// 生成比较指令的标签名
+    /// </summary>
+    private string GenerateComparisonLabelName(ComparisonLabelType labelType)
+    {
+        var labelName = string.Empty;
+        var labelIndex = 0;
+
+        switch (labelType)
+        {
+            case ComparisonLabelType.EQ_TRUE:
+                labelIndex = EQ_TRUELabelIndex++;
+                labelName = $"EQ_TRUE_{labelIndex}";
+                break;
+            case ComparisonLabelType.EQ_END:
+                labelIndex = EQ_ENDLabelIndex++;
+                labelName = $"EQ_END_{labelIndex}";
+                break;
+            case ComparisonLabelType.GT_TRUE:
+                labelIndex = GT_TRUELabelIndex++;
+                labelName = $"GT_TRUE_{labelIndex}";
+                break;
+            case ComparisonLabelType.GT_END:
+                labelIndex = GT_ENDLabelIndex++;
+                labelName = $"GT_END_{labelIndex}";
+                break;
+            case ComparisonLabelType.LT_TRUE:
+                labelIndex = LT_TRUELabelIndex++;
+                labelName = $"LT_TRUE_{labelIndex}";
+                break;
+            case ComparisonLabelType.LT_END:
+                labelIndex = LT_ENDLabelIndex++;
+                labelName = $"LT_END_{labelIndex}";
+                break;
+            default:
+                Console.WriteLine($"GenerateComparisonLabelName error: Unrecognized label type '{labelType}'.");
+                return "";
+        }
+
+        return labelName;
     }
 
     /// <summary>

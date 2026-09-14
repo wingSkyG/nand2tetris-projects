@@ -39,6 +39,16 @@ public static class LanguageSpecificationData
         temp
     }
 
+    public enum ComparisonLabelType
+    {
+        EQ_TRUE,
+        EQ_END,
+        GT_TRUE,
+        GT_END,
+        LT_TRUE,
+        LT_END
+    }
+
     /// <summary>
     /// 算术逻辑指令的key words
     /// </summary>
@@ -84,4 +94,11 @@ public static class LanguageSpecificationData
     public static int ThatPointerIndex = 1;
     public static int StaticVariableBaseAddress = 16;
     public static string FileName = "";
+    
+    public static int EQ_TRUELabelIndex = 0;
+    public static int EQ_ENDLabelIndex = 0;
+    public static int GT_TRUELabelIndex = 0;
+    public static int GT_ENDLabelIndex = 0;
+    public static int LT_TRUELabelIndex = 0;
+    public static int LT_ENDLabelIndex = 0;
 }
