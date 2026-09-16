@@ -29,6 +29,7 @@ public static class LanguageSpecificationData
 
     public enum BranchType
     {
+        Label,
         Goto,
         IfGoto
     }

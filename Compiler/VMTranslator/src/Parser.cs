@@ -40,7 +40,34 @@ class Parser
                 popCommand.Index = int.Parse(ParseSecondParameter(trimmedCommand));
                 vmCommand = popCommand;
                 break;
-        }
+            case CommandType.C_LABEL:
+                var labelCommand = new BranchCommand
+                {
+                    BranchType = BranchType.Label,
+                    LabelName = ParseFirstParameter(trimmedCommand)
+                };
+                vmCommand = labelCommand;
+                break;
+            case CommandType.C_GOTO:
+                var gotoCommand = new BranchCommand
+                {
+                    BranchType = BranchType.Goto,
+                    LabelName = ParseFirstParameter(trimmedCommand)
+                };
+                vmCommand = gotoCommand;
+                break;
+            case CommandType.C_IF:
+                var ifCommand = new BranchCommand
+                {
+                    BranchType = BranchType.IfGoto,
+                    LabelName = ParseFirstParameter(trimmedCommand)
+                };
+                vmCommand = ifCommand;
+                break;
+            default:
+                Console.WriteLine($"Unknown command type: {commandType}");
+                break;
+               }
 
         return vmCommand;
     }

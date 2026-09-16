@@ -23,6 +23,9 @@ class CodeWriter
             case PopCommand pop:
                 assemblyCode = _memoryWriter.WritePop(pop.SegmentType, pop.Index);
                 break;
+            case BranchCommand branch:
+                assemblyCode = _branchWriter.WriteBranch(branch.BranchType, branch.LabelName);
+                break;
             default:
                 Console.WriteLine($"Unknown command type: {command.CommandType}");
                 break;

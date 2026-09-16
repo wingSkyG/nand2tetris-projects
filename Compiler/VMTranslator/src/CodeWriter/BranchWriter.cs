@@ -1,5 +1,8 @@
 using static LanguageSpecificationData;
 
+/// <summary>
+/// 跳转指令翻译器
+/// </summary>
 class BranchWriter
 {
     /// <summary>
@@ -11,23 +14,14 @@ class BranchWriter
 
         switch (branchType)
         {
+            case BranchType.Label:
+                assemblyCode = WriteLabel(labelName);
+                break;
             case BranchType.Goto:
-                assemblyCode = $"""
-                    // goto {labelName}
-                    @{labelName}
-                    0;JMP
-                    """;
+                assemblyCode = WriteGoto(labelName);
                 break;
             case BranchType.IfGoto:
-                assemblyCode = $"""
-                    // if-goto {labelName}
-                    @SP
-                    M=M-1
-                    A=M
-                    D=M
-                    @{labelName}
-                    D;JGT
-                    """;
+                assemblyCode = WriteIf(labelName);
                 break;
         }
 
@@ -40,9 +34,8 @@ class BranchWriter
     private string WriteLabel(string labelName)
     {
         return $"""
-            // {labelName}
-            {labelName}
-            0;JMP
+            // label {labelName}
+            ({labelName})
             """;
     }
 
@@ -64,7 +57,7 @@ class BranchWriter
     private string WriteIf(string labelName)
     {
         return $"""
-            // if {labelName}
+            // if-goto {labelName}
             @SP
             M=M-1
             A=M

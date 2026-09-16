@@ -3,8 +3,8 @@ using static LanguageSpecificationData;
 /// <summary>
 /// 跳转指令类
 /// </summary>
-class BranchCommand
+class BranchCommand : VMCommand
 {
     public BranchType BranchType { get; set; }
-    public string? LabelName { get; set; }
+    public required string LabelName { get; set; }
 }
