@@ -2,6 +2,7 @@ class CodeWriter
 {
     private readonly ArithmeticWriter _arithmeticWriter = new();
     public readonly MemoryWriter _memoryWriter = new();
+    public readonly BranchWriter _branchWriter = new();
 
     /// <summary>
     /// 翻译VMCommand为Assembly Code

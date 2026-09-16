@@ -27,6 +27,12 @@ public static class LanguageSpecificationData
         not
     }
 
+    public enum BranchType
+    {
+        Goto,
+        IfGoto
+    }
+
     public enum SegmentType
     {
         local,

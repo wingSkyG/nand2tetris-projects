@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VMTranslator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9e07109f015556aceeb6947d7ec67e3766771a7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3dbe3b0450761b69d2f52385328bc2cb1d1087e9")]
 [assembly: System.Reflection.AssemblyProductAttribute("VMTranslator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VMTranslator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
