@@ -35,14 +35,15 @@ class FunctionWriter
     /// </summary>
     private string WriteFunction(string functionName, int numVars)
     {
-        LanguageSpecificationData.FunctionNameOfCaller = functionName; // used for "call functionName nArgs" instruction
+        Reset();
+        FunctionNameOfCaller = functionName; // used for "call functionName nArgs" instruction
 
         var assemblyCode = string.Empty;
 
         var loopSymbol = $"{functionName}$LOOP";
         var endloopSymbol = $"{functionName}$ENDLOOP";
         assemblyCode = $"""
-            // function f nVars
+            // function {functionName} {numVars}
             ({functionName})
             @{numVars}
             D=A
@@ -71,7 +72,7 @@ class FunctionWriter
 
         var retAddrLabel = $"{FunctionNameOfCaller}$ret.{CallCounter++}";
         assemblyCode = $"""
-            // call f nArgs
+            // call {functionName} {numArgs}
             @{retAddrLabel}
             D=A
             @SP

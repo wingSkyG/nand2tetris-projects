@@ -1,3 +1,5 @@
+using static LanguageSpecificationData;
+
 class CodeWriter
 {
     private readonly ArithmeticWriter _arithmeticWriter = new();
@@ -6,12 +8,43 @@ class CodeWriter
     public readonly FunctionWriter _functionWriter = new();
 
     /// <summary>
+    /// 生成引导代码
+    /// </summary>
+    public string GenerateBootstrapCode()
+    {
+        var bootstrapCode = string.Empty;
+
+        var firstAssemCode = $"""
+            // SP = 256
+            @256
+            D=A
+            @SP
+            M=D
+            """;
+        bootstrapCode += firstAssemCode;
+        bootstrapCode += "\n";
+        
+        FunctionNameOfCaller = "Bootstrap";
+        var callCommand = new CallCommand
+        {
+            FunctionType = FunctionType.Call,
+            FunctionName = "Sys.init",
+            ArgumentCount = 0
+        };
+        var secondAssemCode = _functionWriter.WriteFunctionCommand(callCommand);
+
+        bootstrapCode += secondAssemCode;
+        bootstrapCode += "\n";
+        return bootstrapCode;
+    }
+
+    /// <summary>
     /// 翻译VMCommand为Assembly Code
     /// </summary>
     public string TranslateVMCommand(VMCommand command)
     {
         var assemblyCode = string.Empty;
-        Console.WriteLine($"TranslateVMCommand: {command}");
+        // Console.WriteLine($"TranslateVMCommand: {command}");
 
         switch (command)
         {

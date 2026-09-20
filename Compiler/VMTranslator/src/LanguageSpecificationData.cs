@@ -118,4 +118,16 @@ public static class LanguageSpecificationData
 
     public static string FunctionNameOfCaller = "";
     public static int CallCounter = 0;
+
+    public static void Reset()
+    {
+        FunctionNameOfCaller = "";
+        CallCounter = 0;
+        EQ_TRUELabelIndex = 0;
+        EQ_ENDLabelIndex = 0;
+        GT_TRUELabelIndex = 0;
+        GT_ENDLabelIndex = 0;
+        LT_TRUELabelIndex = 0;
+        LT_ENDLabelIndex = 0;
+    }
 }

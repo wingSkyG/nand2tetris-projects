@@ -18,7 +18,7 @@ class Parser
         var trimmedCommand = TrimInlineComment(command);
 
         var commandType = ParseCommandType(trimmedCommand);
-        Console.WriteLine($"ParseVMCommand: {commandType}");
+        // Console.WriteLine($"ParseVMCommand: {commandType}");
 
         switch (commandType)
         {
