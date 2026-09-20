@@ -34,6 +34,13 @@ public static class LanguageSpecificationData
         IfGoto
     }
 
+    public enum FunctionType
+    {
+        Function,
+        Call,
+        Return
+    }
+
     public enum SegmentType
     {
         local,

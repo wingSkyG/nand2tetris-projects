@@ -3,6 +3,7 @@ class CodeWriter
     private readonly ArithmeticWriter _arithmeticWriter = new();
     public readonly MemoryWriter _memoryWriter = new();
     public readonly BranchWriter _branchWriter = new();
+    public readonly FunctionWriter _functionWriter = new();
 
     /// <summary>
     /// 翻译VMCommand为Assembly Code
@@ -10,7 +11,7 @@ class CodeWriter
     public string TranslateVMCommand(VMCommand command)
     {
         var assemblyCode = string.Empty;
-        // Console.WriteLine($"TranslateVMCommand: {command}");
+        Console.WriteLine($"TranslateVMCommand: {command}");
 
         switch (command)
         {
@@ -25,6 +26,9 @@ class CodeWriter
                 break;
             case BranchCommand branch:
                 assemblyCode = _branchWriter.WriteBranch(branch.BranchType, branch.LabelName);
+                break;
+            case FunctionCommandBase functionCommand:
+                assemblyCode = _functionWriter.WriteFunctionCommand(functionCommand);
                 break;
             default:
                 Console.WriteLine($"Unknown command type: {command.CommandType}");

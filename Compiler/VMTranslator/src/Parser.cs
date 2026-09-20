@@ -18,7 +18,7 @@ class Parser
         var trimmedCommand = TrimInlineComment(command);
 
         var commandType = ParseCommandType(trimmedCommand);
-        // Console.WriteLine($"ParseVMCommand: {commandType}");
+        Console.WriteLine($"ParseVMCommand: {commandType}");
 
         switch (commandType)
         {
@@ -63,6 +63,31 @@ class Parser
                     LabelName = ParseFirstParameter(trimmedCommand)
                 };
                 vmCommand = ifCommand;
+                break;
+            case CommandType.C_FUNCTION:
+                var functionCommand = new FunctionCommand
+                {
+                    FunctionType = FunctionType.Function,
+                    FunctionName = ParseFirstParameter(trimmedCommand),
+                    VariableCount = int.Parse(ParseSecondParameter(trimmedCommand))
+                };
+                vmCommand = functionCommand;
+                break;
+            case CommandType.C_CALL:
+                var callCommand = new CallCommand
+                {
+                    FunctionType = FunctionType.Call,
+                    FunctionName = ParseFirstParameter(trimmedCommand),
+                    ArgumentCount = int.Parse(ParseSecondParameter(trimmedCommand))
+                };
+                vmCommand = callCommand;
+                break;
+            case CommandType.C_RETURN:
+                var returnCommand = new ReturnCommand
+                {
+                    FunctionType = FunctionType.Return
+                };
+                vmCommand = returnCommand;
                 break;
             default:
                 Console.WriteLine($"Unknown command type: {commandType}");
