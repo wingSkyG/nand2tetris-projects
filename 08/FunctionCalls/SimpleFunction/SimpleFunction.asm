@@ -102,39 +102,33 @@ M=M+1
 D=M
 @R13
 M=D // frame = LCL
-
 @5
 A=D-A
 D=M
 @R14
 M=D // retAddr = *(frame-5)
-
 @SP
 M=M-1
 A=M
 D=M
 @ARG
 A=M
-M=D // *ARG = pop()
-
+M=D // *ARG = pop()  
 @ARG
 D=M
 @SP
-M=D+1   // SP = ARG+1
-
+M=D+1 // SP = ARG+1     
 @R13
 A=M-1
 D=M
 @THAT
 M=D // THAT = *(frame-1)
-
 @R13
 A=M-1
 A=A-1
 D=M
 @THIS
 M=D // THIS = *(frame-2)
-
 @R13
 A=M-1
 A=A-1
@@ -142,7 +136,6 @@ A=A-1
 D=M
 @ARG
 M=D // ARG = *(frame-3)
-
 @R13
 A=M-1
 A=A-1
@@ -151,7 +144,6 @@ A=A-1
 D=M
 @LCL
 M=D // LCL = *(frame-4)
-
 @R14
 A=M
 0;JMP // goto retAddr

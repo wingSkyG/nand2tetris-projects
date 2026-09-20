@@ -115,4 +115,7 @@ public static class LanguageSpecificationData
     public static int GT_ENDLabelIndex = 0;
     public static int LT_TRUELabelIndex = 0;
     public static int LT_ENDLabelIndex = 0;
+
+    public static string FunctionNameOfCaller = "";
+    public static int CallCounter = 0;
 }

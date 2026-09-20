@@ -35,6 +35,8 @@ class FunctionWriter
     /// </summary>
     private string WriteFunction(string functionName, int numVars)
     {
+        LanguageSpecificationData.FunctionNameOfCaller = functionName; // used for "call functionName nArgs" instruction
+
         var assemblyCode = string.Empty;
 
         var loopSymbol = $"{functionName}$LOOP";
@@ -65,7 +67,64 @@ class FunctionWriter
     /// </summary>
     private string WriteCall(string functionName, int numArgs)
     {
-        return string.Empty;
+        var assemblyCode = string.Empty;
+
+        var retAddrLabel = $"{FunctionNameOfCaller}$ret.{CallCounter++}";
+        assemblyCode = $"""
+            // call f nArgs
+            @{retAddrLabel}
+            D=A
+            @SP
+            A=M
+            M=D
+            @SP
+            M=M+1   // push retAddr
+            @LCL
+            D=M
+            @SP
+            A=M
+            M=D
+            @SP
+            M=M+1   // push LCL
+            @ARG
+            D=M
+            @SP
+            A=M
+            M=D
+            @SP
+            M=M+1   // push ARG
+            @THIS
+            D=M
+            @SP
+            A=M
+            M=D
+            @SP
+            M=M+1   // push THIS
+            @THAT
+            D=M
+            @SP
+            A=M
+            M=D
+            @SP
+            M=M+1   // push THAT
+            @SP
+            D=M
+            @5
+            D=D-A
+            @{numArgs}
+            D=D-A
+            @ARG
+            M=D     // ARG = SP-5-numArgs
+            @SP
+            D=M
+            @LCL
+            M=D     // LCL = SP
+            @{functionName}
+            0;JMP   // goto f
+            ({retAddrLabel})    // retAddr
+            """;
+
+        return assemblyCode;
     }
 
     /// <summary>
@@ -81,39 +140,33 @@ class FunctionWriter
             D=M
             @R13
             M=D // frame = LCL
-
             @5
             A=D-A
             D=M
             @R14
             M=D // retAddr = *(frame-5)
-
             @SP
             M=M-1
             A=M
             D=M
             @ARG
             A=M
-            M=D // *ARG = pop()
-        
+            M=D // *ARG = pop()  
             @ARG
             D=M
             @SP
-            M=D+1   // SP = ARG+1
-            
+            M=D+1 // SP = ARG+1     
             @R13
             A=M-1
             D=M
             @THAT
             M=D // THAT = *(frame-1)
-
             @R13
             A=M-1
             A=A-1
             D=M
             @THIS
             M=D // THIS = *(frame-2)
-
             @R13
             A=M-1
             A=A-1
@@ -121,7 +174,6 @@ class FunctionWriter
             D=M
             @ARG
             M=D // ARG = *(frame-3)
-
             @R13
             A=M-1
             A=A-1
@@ -130,7 +182,6 @@ class FunctionWriter
             D=M
             @LCL
             M=D // LCL = *(frame-4)
-
             @R14
             A=M
             0;JMP // goto retAddr
