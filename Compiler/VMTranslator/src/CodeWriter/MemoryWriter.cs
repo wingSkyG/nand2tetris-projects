@@ -5,6 +5,16 @@ using static LanguageSpecificationData;
 /// </summary>
 class MemoryWriter
 {
+    private string FileName = "";
+
+    /// <summary>
+    /// 设置文件名
+    /// </summary>
+    public void SetFileName(string fileName)
+    {
+        FileName = fileName;
+    }
+
     /// <summary>
     /// 翻译pop指令为Assembly Code
     /// </summary>

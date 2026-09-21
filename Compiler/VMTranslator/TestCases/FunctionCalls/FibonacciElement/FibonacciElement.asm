@@ -1,4 +1,4 @@
-/// Bootstrap
+/// Bootstrap Code
 // SP = 256
 @256
 D=A
@@ -56,7 +56,6 @@ M=D     // LCL = SP
 0;JMP   // goto f
 (Bootstrap$ret.0)    // retAddr
 
-
 /// Sys.vm
 // function Sys.init 0
 (Sys.init)
@@ -72,7 +71,6 @@ M=0
 M=M+1
 D=D-1
 @Sys.init$LOOP
-0;JMP
 (Sys.init$ENDLOOP)
 // push constant 4
 @4
@@ -138,7 +136,6 @@ M=D     // LCL = SP
 // goto END
 @END
 0;JMP
-
 /// Main.vm
 // function Main.fibonacci 0
 (Main.fibonacci)
@@ -495,4 +492,3 @@ M=D // LCL = *(frame-4)
 @R14
 A=M
 0;JMP // goto retAddr
-

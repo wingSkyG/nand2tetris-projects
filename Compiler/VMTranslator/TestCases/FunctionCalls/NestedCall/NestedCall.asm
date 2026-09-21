@@ -72,16 +72,227 @@ M=M+1
 D=D-1
 @Sys.init$LOOP
 (Sys.init$ENDLOOP)
-// push constant 4
-@4
+// push constant 4000
+@4000
 D=A
 @SP
 A=M
 M=D
 @SP
 M=M+1
-// call Main.fibonacci 1
+// pop pointer 0
+@SP
+M=M-1
+A=M
+D=M
+@THIS
+M=D
+// push constant 5000
+@5000
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 1
+@SP
+M=M-1
+A=M
+D=M
+@THAT
+M=D
+// call Sys.main 0
 @Sys.init$ret.0
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1   // push retAddr
+@LCL
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1   // push LCL
+@ARG
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1   // push ARG
+@THIS
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1   // push THIS
+@THAT
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1   // push THAT
+@SP
+D=M
+@5
+D=D-A
+@0
+D=D-A
+@ARG
+M=D     // ARG = SP-5-numArgs
+@SP
+D=M
+@LCL
+M=D     // LCL = SP
+@Sys.main
+0;JMP   // goto f
+(Sys.init$ret.0)    // retAddr
+// pop temp 1
+@5
+D=A
+@1
+D=D+A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+// label LOOP
+(LOOP)
+// goto LOOP
+@LOOP
+0;JMP
+// function Sys.main 5
+(Sys.main)
+@5
+D=A
+(Sys.main$LOOP)
+@Sys.main$ENDLOOP
+D;JEQ
+@SP
+A=M
+M=0
+@SP
+M=M+1
+D=D-1
+@Sys.main$LOOP
+(Sys.main$ENDLOOP)
+// push constant 4001
+@4001
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 0
+@SP
+M=M-1
+A=M
+D=M
+@THIS
+M=D
+// push constant 5001
+@5001
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 1
+@SP
+M=M-1
+A=M
+D=M
+@THAT
+M=D
+// push constant 200
+@200
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop local 1
+@LCL
+D=M
+@1
+D=D+A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+// push constant 40
+@40
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop local 2
+@LCL
+D=M
+@2
+D=D+A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+// push constant 6
+@6
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop local 3
+@LCL
+D=M
+@3
+D=D+A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+// push constant 123
+@123
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// call Sys.add12 1
+@Sys.main$ret.0
 D=A
 @SP
 A=M
@@ -128,32 +339,25 @@ M=D     // ARG = SP-5-numArgs
 D=M
 @LCL
 M=D     // LCL = SP
-@Main.fibonacci
+@Sys.add12
 0;JMP   // goto f
-(Sys.init$ret.0)    // retAddr
-// label END
-(END)
-// goto END
-@END
-0;JMP
-/// Main.vm
-// function Main.fibonacci 0
-(Main.fibonacci)
-@0
+(Sys.main$ret.0)    // retAddr
+// pop temp 0
+@5
 D=A
-(Main.fibonacci$LOOP)
-@Main.fibonacci$ENDLOOP
-D;JEQ
+@0
+D=D+A
+@R13
+M=D
 @SP
+M=M-1
 A=M
-M=0
-@SP
-M=M+1
-D=D-1
-@Main.fibonacci$LOOP
-(Main.fibonacci$ENDLOOP)
-// push argument 0
-@ARG
+D=M
+@R13
+A=M
+M=D
+// push local 0
+@LCL
 D=M
 @0
 A=D+A
@@ -163,58 +367,92 @@ A=M
 M=D
 @SP
 M=M+1
-// push constant 2
+// push local 1
+@LCL
+D=M
+@1
+A=D+A
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// push local 2
+@LCL
+D=M
 @2
-D=A
-@SP
-A=M
-M=D
-@SP
-M=M+1
-// lt
-@SP
-M=M-1
-A=M
-D=M
-@SP
-M=M-1
-A=M
-D=M-D
-@LT_TRUE_0
-D;JLT
-@SP
-A=M
-M=0
-@LT_END_0
-0;JMP
-(LT_TRUE_0)
-@SP
-A=M
-M=-1
-(LT_END_0)
-@SP
-M=M+1
-// if-goto N_LT_2
-@SP
-M=M-1
-A=M
-D=M
-@N_LT_2
-D;JGT
-// goto N_GE_2
-@N_GE_2
-0;JMP
-// label N_LT_2
-(N_LT_2)
-// push argument 0
-@ARG
-D=M
-@0
 A=D+A
 D=M
 @SP
 A=M
 M=D
+@SP
+M=M+1
+// push local 3
+@LCL
+D=M
+@3
+A=D+A
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// push local 4
+@LCL
+D=M
+@4
+A=D+A
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=D+M
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=D+M
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=D+M
+@SP
+M=M+1
+// add
+@SP
+M=M-1
+A=M
+D=M
+@SP
+M=M-1
+A=M
+M=D+M
 @SP
 M=M+1
 // return
@@ -267,8 +505,51 @@ M=D // LCL = *(frame-4)
 @R14
 A=M
 0;JMP // goto retAddr
-// label N_GE_2
-(N_GE_2)
+// function Sys.add12 0
+(Sys.add12)
+@0
+D=A
+(Sys.add12$LOOP)
+@Sys.add12$ENDLOOP
+D;JEQ
+@SP
+A=M
+M=0
+@SP
+M=M+1
+D=D-1
+@Sys.add12$LOOP
+(Sys.add12$ENDLOOP)
+// push constant 4002
+@4002
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 0
+@SP
+M=M-1
+A=M
+D=M
+@THIS
+M=D
+// push constant 5002
+@5002
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 1
+@SP
+M=M-1
+A=M
+D=M
+@THAT
+M=D
 // push argument 0
 @ARG
 D=M
@@ -280,157 +561,14 @@ A=M
 M=D
 @SP
 M=M+1
-// push constant 2
-@2
+// push constant 12
+@12
 D=A
 @SP
 A=M
 M=D
 @SP
 M=M+1
-// sub
-@SP
-M=M-1
-A=M
-D=M
-@SP
-M=M-1
-A=M
-M=M-D
-@SP
-M=M+1
-// call Main.fibonacci 1
-@Main.fibonacci$ret.0
-D=A
-@SP
-A=M
-M=D
-@SP
-M=M+1   // push retAddr
-@LCL
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1   // push LCL
-@ARG
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1   // push ARG
-@THIS
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1   // push THIS
-@THAT
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1   // push THAT
-@SP
-D=M
-@5
-D=D-A
-@1
-D=D-A
-@ARG
-M=D     // ARG = SP-5-numArgs
-@SP
-D=M
-@LCL
-M=D     // LCL = SP
-@Main.fibonacci
-0;JMP   // goto f
-(Main.fibonacci$ret.0)    // retAddr
-// push argument 0
-@ARG
-D=M
-@0
-A=D+A
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1
-// push constant 1
-@1
-D=A
-@SP
-A=M
-M=D
-@SP
-M=M+1
-// sub
-@SP
-M=M-1
-A=M
-D=M
-@SP
-M=M-1
-A=M
-M=M-D
-@SP
-M=M+1
-// call Main.fibonacci 1
-@Main.fibonacci$ret.1
-D=A
-@SP
-A=M
-M=D
-@SP
-M=M+1   // push retAddr
-@LCL
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1   // push LCL
-@ARG
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1   // push ARG
-@THIS
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1   // push THIS
-@THAT
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1   // push THAT
-@SP
-D=M
-@5
-D=D-A
-@1
-D=D-A
-@ARG
-M=D     // ARG = SP-5-numArgs
-@SP
-D=M
-@LCL
-M=D     // LCL = SP
-@Main.fibonacci
-0;JMP   // goto f
-(Main.fibonacci$ret.1)    // retAddr
 // add
 @SP
 M=M-1

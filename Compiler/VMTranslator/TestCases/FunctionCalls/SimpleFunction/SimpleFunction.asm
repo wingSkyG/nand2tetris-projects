@@ -1,4 +1,63 @@
-// function f nVars
+/// Bootstrap Code
+// SP = 256
+@256
+D=A
+@SP
+M=D
+// call Sys.init 0
+@Bootstrap$ret.0
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1   // push retAddr
+@LCL
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1   // push LCL
+@ARG
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1   // push ARG
+@THIS
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1   // push THIS
+@THAT
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1   // push THAT
+@SP
+D=M
+@5
+D=D-A
+@0
+D=D-A
+@ARG
+M=D     // ARG = SP-5-numArgs
+@SP
+D=M
+@LCL
+M=D     // LCL = SP
+@Sys.init
+0;JMP   // goto f
+(Bootstrap$ret.0)    // retAddr
+
+/// SimpleFunction.vm
+// function SimpleFunction.test 2
 (SimpleFunction.test)
 @2
 D=A

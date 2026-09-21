@@ -1,29 +1,94 @@
+using System.Text;
 using static LanguageSpecificationData;
 
 class CodeWriter
 {
-    private readonly ArithmeticWriter _arithmeticWriter = new();
-    public readonly MemoryWriter _memoryWriter = new();
-    public readonly BranchWriter _branchWriter = new();
-    public readonly FunctionWriter _functionWriter = new();
+    private readonly ArithmeticWriter _arithmeticWriter;
+    private readonly MemoryWriter _memoryWriter;
+    private readonly BranchWriter _branchWriter;
+    private readonly FunctionWriter _functionWriter;
+
+    private string FileName = "";
+    private StringBuilder _strBuilder = new();
+
+    public CodeWriter()
+    {
+        _arithmeticWriter = new();
+        _memoryWriter = new();
+        _branchWriter = new();
+        _functionWriter = new();
+        InsertBootstrapCode();
+    }
+
+    /// <summary>
+    /// 翻译VMCommand为Assembly Code
+    /// </summary>
+    public void TranslateVMCommand(VMCommand command)
+    {
+        var assemCode = string.Empty;
+        // Console.WriteLine($"TranslateVMCommand: {command}");
+
+        switch (command)
+        {
+            case ArithmeticCommand arithmetic:
+                assemCode = _arithmeticWriter.WriteArithmetic(arithmetic.OperatorType);
+                break;
+            case PushCommand push:
+                assemCode = _memoryWriter.WritePush(push.SegmentType, push.Index);
+                break;
+            case PopCommand pop:
+                assemCode = _memoryWriter.WritePop(pop.SegmentType, pop.Index);
+                break;
+            case BranchCommand branch:
+                assemCode = _branchWriter.WriteBranch(branch.BranchType, branch.LabelName);
+                break;
+            case FunctionCommandBase functionCommand:
+                assemCode = _functionWriter.WriteFunctionCommand(functionCommand);
+                break;
+            default:
+                Console.WriteLine($"Unknown command type: {command.CommandType}");
+                break;
+        }
+
+        _strBuilder.AppendLine(assemCode);
+    }
+
+    /// <summary>
+    /// 设置文件名
+    /// </summary>
+    public void SetFileName(string fileName)
+    {
+        FileName = fileName;
+        _memoryWriter.SetFileName(fileName);
+        AppendFileNameCommend();
+    }
+
+    /// <summary>
+    /// 获取Assembly Code
+    /// </summary>
+    public string GetAssemblyCode()
+    {
+        return _strBuilder.ToString();
+    }
 
     /// <summary>
     /// 生成引导代码
     /// </summary>
-    public string GenerateBootstrapCode()
+    private void InsertBootstrapCode()
     {
         var bootstrapCode = string.Empty;
 
-        var firstAssemCode = $"""
+        bootstrapCode += "/// Bootstrap Code\n";
+        var letAssemCode = $"""
             // SP = 256
             @256
             D=A
             @SP
             M=D
             """;
-        bootstrapCode += firstAssemCode;
+        bootstrapCode += letAssemCode;
         bootstrapCode += "\n";
-        
+
         FunctionNameOfCaller = "Bootstrap";
         var callCommand = new CallCommand
         {
@@ -31,43 +96,19 @@ class CodeWriter
             FunctionName = "Sys.init",
             ArgumentCount = 0
         };
-        var secondAssemCode = _functionWriter.WriteFunctionCommand(callCommand);
+        var callAssemCode = _functionWriter.WriteFunctionCommand(callCommand);
 
-        bootstrapCode += secondAssemCode;
+        bootstrapCode += callAssemCode;
         bootstrapCode += "\n";
-        return bootstrapCode;
+        
+        _strBuilder.AppendLine(bootstrapCode);
     }
 
     /// <summary>
-    /// 翻译VMCommand为Assembly Code
+    /// 追加文件名注释
     /// </summary>
-    public string TranslateVMCommand(VMCommand command)
+    private void AppendFileNameCommend()
     {
-        var assemblyCode = string.Empty;
-        // Console.WriteLine($"TranslateVMCommand: {command}");
-
-        switch (command)
-        {
-            case ArithmeticCommand arithmetic:
-                assemblyCode = _arithmeticWriter.WriteArithmetic(arithmetic.OperatorType);
-                break;
-            case PushCommand push:
-                assemblyCode = _memoryWriter.WritePush(push.SegmentType, push.Index);
-                break;
-            case PopCommand pop:
-                assemblyCode = _memoryWriter.WritePop(pop.SegmentType, pop.Index);
-                break;
-            case BranchCommand branch:
-                assemblyCode = _branchWriter.WriteBranch(branch.BranchType, branch.LabelName);
-                break;
-            case FunctionCommandBase functionCommand:
-                assemblyCode = _functionWriter.WriteFunctionCommand(functionCommand);
-                break;
-            default:
-                Console.WriteLine($"Unknown command type: {command.CommandType}");
-                break;
-        }
-
-        return assemblyCode;
+        _strBuilder.AppendLine($"/// {FileName}.vm");
     }
 }
