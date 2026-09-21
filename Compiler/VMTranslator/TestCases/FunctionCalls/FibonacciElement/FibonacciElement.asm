@@ -71,6 +71,7 @@ M=0
 M=M+1
 D=D-1
 @Sys.init$LOOP
+0;JMP
 (Sys.init$ENDLOOP)
 // push constant 4
 @4
@@ -151,6 +152,7 @@ M=0
 M=M+1
 D=D-1
 @Main.fibonacci$LOOP
+0;JMP
 (Main.fibonacci$ENDLOOP)
 // push argument 0
 @ARG
@@ -200,7 +202,7 @@ M=M-1
 A=M
 D=M
 @N_LT_2
-D;JGT
+D;JLT
 // goto N_GE_2
 @N_GE_2
 0;JMP

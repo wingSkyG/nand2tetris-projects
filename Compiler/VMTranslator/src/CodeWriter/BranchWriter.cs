@@ -63,7 +63,7 @@ class BranchWriter
             A=M
             D=M
             @{labelName}
-            D;JGT
+            D;JLT
             """;
     }
 }

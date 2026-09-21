@@ -71,6 +71,7 @@ M=0
 M=M+1
 D=D-1
 @Sys.init$LOOP
+0;JMP
 (Sys.init$ENDLOOP)
 // push constant 4000
 @4000
@@ -186,6 +187,7 @@ M=0
 M=M+1
 D=D-1
 @Sys.main$LOOP
+0;JMP
 (Sys.main$ENDLOOP)
 // push constant 4001
 @4001
@@ -519,6 +521,7 @@ M=0
 M=M+1
 D=D-1
 @Sys.add12$LOOP
+0;JMP
 (Sys.add12$ENDLOOP)
 // push constant 4002
 @4002

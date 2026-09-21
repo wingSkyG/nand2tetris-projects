@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8q6nWluT95c=",
+  "dgSpecHash": "nGW4lEW1db4=",
   "success": true,
-  "projectFilePath": "f:\\Code\\Project\\Program\\NandToTetris\\nand2tetris-projects\\Compiler\\VMTranslator\\VMTranslator.csproj",
+  "projectFilePath": "c:\\WorkStation\\Study\\Nand2Tetris\\nand2tetris-projects\\Compiler\\VMTranslator\\VMTranslator.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

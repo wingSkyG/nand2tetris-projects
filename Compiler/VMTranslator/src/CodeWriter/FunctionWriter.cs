@@ -57,6 +57,7 @@ class FunctionWriter
             M=M+1
             D=D-1
             @{loopSymbol}
+            0;JMP
             ({endloopSymbol})
             """;
 
