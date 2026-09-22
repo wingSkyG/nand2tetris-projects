@@ -1,4 +1,9 @@
-using static LanguageSpecificationData;
+public enum FunctionType
+{
+    Function,
+    Call,
+    Return
+}
 
 class FunctionCommandBase : VMCommand
 {

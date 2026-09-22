@@ -1,5 +1,4 @@
 using System.Text;
-using static LanguageSpecificationData;
 
 class CodeWriter
 {
@@ -31,16 +30,16 @@ class CodeWriter
         switch (command)
         {
             case ArithmeticCommand arithmetic:
-                assemCode = _arithmeticWriter.WriteArithmetic(arithmetic.OperatorType);
+                assemCode = _arithmeticWriter.WriteArithmetic(arithmetic);
                 break;
             case PushCommand push:
-                assemCode = _memoryWriter.WritePush(push.SegmentType, push.Index);
+                assemCode = _memoryWriter.WritePush(push);
                 break;
             case PopCommand pop:
-                assemCode = _memoryWriter.WritePop(pop.SegmentType, pop.Index);
+                assemCode = _memoryWriter.WritePop(pop);
                 break;
             case BranchCommand branch:
-                assemCode = _branchWriter.WriteBranch(branch.BranchType, branch.LabelName);
+                assemCode = _branchWriter.WriteBranch(branch);
                 break;
             case FunctionCommandBase functionCommand:
                 assemCode = _functionWriter.WriteFunctionCommand(functionCommand);
@@ -89,7 +88,7 @@ class CodeWriter
         bootstrapCode += letAssemCode;
         bootstrapCode += "\n";
 
-        FunctionNameOfCaller = "Bootstrap";
+        _functionWriter.FunctionNameOfCaller = "Bootstrap";
         var callCommand = new CallCommand
         {
             FunctionType = FunctionType.Call,

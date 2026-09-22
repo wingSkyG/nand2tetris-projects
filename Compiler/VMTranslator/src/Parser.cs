@@ -1,7 +1,32 @@
-using static LanguageSpecificationData;
+// using static LanguageSpecificationData;
 
 class Parser
 {
+    /// <summary>
+    /// 算术逻辑指令的key words
+    /// </summary>
+    private static readonly List<string> ArithmeticLogicalKeyWords =
+    [
+        "add",
+        "sub",
+        "neg",
+        "eq",
+        "gt",
+        "lt",
+        "and",
+        "or",
+        "not"
+    ];
+
+    private static readonly string PushKeyWord = "push"; // 推送指令的key word
+    private static readonly string PopKeyWord = "pop"; // 弹出指令的key word
+    private static readonly string LabelKeyWord = "label"; // 标签指令的key word
+    private static readonly string GotoKeyWord = "goto"; // 跳转指令的key word
+    private static readonly string IfKeyWord = "if-goto"; // 条件跳转指令的key word
+    private static readonly string FunctionKeyWord = "function"; // 函数指令的key word
+    private static readonly string ReturnKeyWord = "return"; // 返回指令的key word
+    private static readonly string CallKeyWord = "call"; // 调用指令的key word  
+
     /// <summary>
     /// 解析VMCommand
     /// </summary>
@@ -23,26 +48,35 @@ class Parser
         switch (commandType)
         {
             case CommandType.C_ARITHMETIC:
-                var arithmeticCommand = new ArithmeticCommand();
-                arithmeticCommand.CommandType = commandType;
-                arithmeticCommand.OperatorType = Enum.Parse<ArithmeticOperatorType>(trimmedCommand);
+                var arithmeticCommand = new ArithmeticCommand
+                {
+                    CommandType = commandType,
+                    OperatorType = Enum.Parse<ArithmeticOperatorType>(trimmedCommand)
+                };
                 vmCommand = arithmeticCommand;
                 break;
             case CommandType.C_PUSH:
-                var pushCommand = new PushCommand();
-                pushCommand.SegmentType = Enum.Parse<SegmentType>(ParseFirstParameter(trimmedCommand));
-                pushCommand.Index = int.Parse(ParseSecondParameter(trimmedCommand));
+                var pushCommand = new PushCommand
+                {
+                    CommandType = commandType,
+                    SegmentType = Enum.Parse<SegmentType>(ParseFirstParameter(trimmedCommand)),
+                    Index = int.Parse(ParseSecondParameter(trimmedCommand))
+                };
                 vmCommand = pushCommand;
                 break;
             case CommandType.C_POP:
-                var popCommand = new PopCommand();
-                popCommand.SegmentType = (SegmentType)Enum.Parse(typeof(SegmentType), ParseFirstParameter(trimmedCommand));
-                popCommand.Index = int.Parse(ParseSecondParameter(trimmedCommand));
+                var popCommand = new PopCommand
+                {
+                    CommandType = commandType,
+                    SegmentType = (SegmentType)Enum.Parse(typeof(SegmentType), ParseFirstParameter(trimmedCommand)),
+                    Index = int.Parse(ParseSecondParameter(trimmedCommand))
+                };
                 vmCommand = popCommand;
                 break;
             case CommandType.C_LABEL:
                 var labelCommand = new BranchCommand
                 {
+                    CommandType = commandType,
                     BranchType = BranchType.Label,
                     LabelName = ParseFirstParameter(trimmedCommand)
                 };

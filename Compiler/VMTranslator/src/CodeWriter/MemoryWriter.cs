@@ -1,11 +1,28 @@
-using static LanguageSpecificationData;
-
 /// <summary>
 /// 内存指令翻译器
 /// </summary>
 class MemoryWriter
 {
     private string FileName = "";
+
+    private static int TempBaseAddress = 5;
+    private static int ThisPointerIndex = 0;
+    private static int ThatPointerIndex = 1;
+    
+    /// <summary>
+    /// 段类型（VM language地址段关键字）到预定义符号（Assembly预定义符号关键字）的映射
+    /// </summary>
+    public static readonly Dictionary<SegmentType, string> SegmentTypeToPredefinedSymbolMapDict = new()
+    {
+        [SegmentType.local] = "LCL",
+        [SegmentType.argument] = "ARG",
+        [SegmentType.@this] = "THIS",
+        [SegmentType.that] = "THAT",
+        [SegmentType.constant] = "@CONSTANT",
+        [SegmentType.@static] = "@STATIC",
+        [SegmentType.pointer] = "POINTER",
+        [SegmentType.temp] = "TEMP"
+    };
 
     /// <summary>
     /// 设置文件名
@@ -18,8 +35,11 @@ class MemoryWriter
     /// <summary>
     /// 翻译pop指令为Assembly Code
     /// </summary>
-    public string WritePop(SegmentType segmentType, int index)
+    public string WritePop(PopCommand pop)
     {
+        var segmentType = pop.SegmentType;
+        var index = pop.Index;
+
         string? assemblyCode;
 
         if (segmentType == SegmentType.temp)
@@ -127,8 +147,10 @@ class MemoryWriter
     /// <summary>
     /// 翻译push指令为Assembly Code
     /// </summary>
-    public string WritePush(SegmentType segmentType, int index)
+    public string WritePush(PushCommand push)
     {
+        var segmentType = push.SegmentType;
+        var index = push.Index;
         var predefinedSymbol = GetPredefinedSymbol(segmentType);
 
         string? assemblyCode;

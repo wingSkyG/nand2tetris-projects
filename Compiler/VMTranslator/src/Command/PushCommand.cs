@@ -1,4 +1,14 @@
-using static LanguageSpecificationData;
+public enum SegmentType
+{
+    local,
+    argument,
+    @this,
+    that,
+    constant,
+    @static,
+    pointer,
+    temp
+}
 
 public class PushCommand : VMCommand
 {

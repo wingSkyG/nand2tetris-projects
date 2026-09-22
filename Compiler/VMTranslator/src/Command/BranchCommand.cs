@@ -1,4 +1,9 @@
-using static LanguageSpecificationData;
+public enum BranchType
+{
+    Label,
+    Goto,
+    IfGoto
+}
 
 /// <summary>
 /// 跳转指令类

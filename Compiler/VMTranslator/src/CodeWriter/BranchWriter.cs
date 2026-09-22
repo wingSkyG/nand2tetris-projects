@@ -1,5 +1,3 @@
-using static LanguageSpecificationData;
-
 /// <summary>
 /// 跳转指令翻译器
 /// </summary>
@@ -8,8 +6,11 @@ class BranchWriter
     /// <summary>
     /// 翻译跳转指令为Assembly Code
     /// </summary>
-    public string WriteBranch(BranchType branchType, string labelName)
+    public string WriteBranch(BranchCommand branch)
     {
+        var branchType = branch.BranchType;
+        var labelName = branch.LabelName;
+        
         var assemblyCode = string.Empty;
 
         switch (branchType)

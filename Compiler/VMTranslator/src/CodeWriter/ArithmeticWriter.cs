@@ -1,17 +1,34 @@
-using static LanguageSpecificationData;
-
 /// <summary>
 /// 算术逻辑指令翻译器
 /// </summary>
 class ArithmeticWriter
 {
+    private enum ComparisonLabelType
+    {
+        EQ_TRUE,
+        EQ_END,
+        GT_TRUE,
+        GT_END,
+        LT_TRUE,
+        LT_END
+    }
+
+    private static int EQ_TRUELabelIndex = 0;
+    private static int EQ_ENDLabelIndex = 0;
+    private static int GT_TRUELabelIndex = 0;
+    private static int GT_ENDLabelIndex = 0;
+    private static int LT_TRUELabelIndex = 0;
+    private static int LT_ENDLabelIndex = 0;
+
+
     /// <summary>
     /// 翻译算术逻辑指令为Assembly Code
     /// </summary>
-    public string WriteArithmetic(ArithmeticOperatorType operatorType)
+    public string WriteArithmetic(ArithmeticCommand command)
     {
         var assemblyCode = string.Empty;
 
+        var operatorType = command.OperatorType;
         switch (operatorType)
         {
             case ArithmeticOperatorType.add:

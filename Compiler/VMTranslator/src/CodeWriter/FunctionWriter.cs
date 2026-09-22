@@ -1,10 +1,10 @@
-using static LanguageSpecificationData;
-
 /// <summary>
 /// 函数指令翻译器
 /// </summary>
 class FunctionWriter
 {
+    public string FunctionNameOfCaller = "";
+    private int CallCounter = 0;
 
     /// <summary>
     /// 翻译函数调用指令为Assembly Code
@@ -28,6 +28,12 @@ class FunctionWriter
         }
 
         return string.Empty;
+    }
+
+    private void Reset()
+    {
+        FunctionNameOfCaller = "";
+        CallCounter = 0;
     }
 
     /// <summary>

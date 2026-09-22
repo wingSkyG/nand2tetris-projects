@@ -1,4 +1,3 @@
-
 class VMTranslator
 {
     private Parser parser = new();
